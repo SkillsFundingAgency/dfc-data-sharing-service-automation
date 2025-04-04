@@ -1,0 +1,41 @@
+{
+    "global": {
+        "ACPLA_APIM_ROUTE": "xxx/api/xxx/",
+        "ACT_APIM_ROUTE": "xxx/api/xxx/",
+        "ADDR_APIM_ROUTE": "xxx/api/xxx/",
+        "ADVDE_APIM_ROUTE": "xxx/api/xxx/",
+        "COL_APIM_ROUTE": "collections/api/collections/",
+        "CONT_APIM_ROUTE": "xxx/api/xxx/",
+        "CUST_APIM_ROUTE": "xxx/api/xxx/",
+        "DIV_APIM_ROUTE": "xxx/api/xxx/",
+        "EMPLOY_APIM_ROUTE": "xxx/api/xxx/",
+        "GOALS_APIM_ROUTE": "xxx/api/xxx/",
+        "INTAC_APIM_ROUTE": "xxx/api/xxx/",
+        "LEARN_APIM_ROUTE": "xxx/api/xxx/",
+        "OTCM_APIM_ROUTE": "xxx/api/xxx/",
+        "SESS_APIM_ROUTE": "xxx/api/xxx/",
+        "SUBS_APIM_ROUTE": "xxx/api/xxx/",
+        "TRAN_APIM_ROUTE": "xxx/api/xxx/",
+        "WCHAT_APIM_ROUTE": "xxx/api/xxx/"
+    },
+    "AT": {
+        "APIM_URL": "<REPLACE ME>",
+        "APIM_ACCESS_KEY": "<REPLACE ME>"
+    },
+    "TEST": {
+        "APIM_URL": "<REPLACE ME>",
+        "APIM_ACCESS_KEY": "<REPLACE ME>"
+    },
+    "OAT": {
+        "APIM_URL": "<REPLACE ME>",
+        "APIM_ACCESS_KEY": "<REPLACE ME>"
+    },
+    "PP": {
+        "APIM_URL": "<REPLACE ME>",
+        "APIM_ACCESS_KEY": "<REPLACE ME>"
+    },
+    "PRD": {
+        "APIM_URL": "<REPLACE ME>",
+        "APIM_ACCESS_KEY": "<REPLACE ME>"
+    }
+}

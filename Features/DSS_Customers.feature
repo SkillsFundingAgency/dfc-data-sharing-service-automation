@@ -3,7 +3,7 @@ Feature: DSS Customers
   @happy_path
   
   Scenario: POST customer (valid request)
-    When User sends POST customers request to endpoint "CUST_APIM_ROUTE" with no ids and the following details
+    When User sends POST customers request with no ids and the following details
 		| Field                      | Value                |
 		| DateOfRegistration         | 2018-07-27T16:11:00Z |
 		| Title                      | 1                    |
@@ -40,7 +40,7 @@ Feature: DSS Customers
 		| PriorityGroups             | [1, 3]               |
 
   Scenario: GET customer (valid request)
-    When User sends GET customers request to endpoint "CUST_APIM_ROUTE" with customerid
+    When User sends GET customers request with customerid
     Then User verifies the status code is "200"
 	And Response should contain
 		| Field                      | Value                |

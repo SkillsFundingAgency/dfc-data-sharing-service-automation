@@ -1,22 +1,24 @@
 {
     "global": {
-        "ACPLA_APIM_ROUTE": "xxx/api/xxx/",
-        "ACT_APIM_ROUTE": "xxx/api/xxx/",
-        "ADDR_APIM_ROUTE": "xxx/api/xxx/",
-        "ADVDE_APIM_ROUTE": "xxx/api/xxx/",
-        "COL_APIM_ROUTE": "collections/api/collections/",
-        "CONT_APIM_ROUTE": "xxx/api/xxx/",
-        "CUST_APIM_ROUTE": "xxx/api/xxx/",
-        "DIV_APIM_ROUTE": "xxx/api/xxx/",
-        "EMPLOY_APIM_ROUTE": "xxx/api/xxx/",
-        "GOALS_APIM_ROUTE": "xxx/api/xxx/",
-        "INTAC_APIM_ROUTE": "xxx/api/xxx/",
-        "LEARN_APIM_ROUTE": "xxx/api/xxx/",
-        "OTCM_APIM_ROUTE": "xxx/api/xxx/",
-        "SESS_APIM_ROUTE": "xxx/api/xxx/",
-        "SUBS_APIM_ROUTE": "xxx/api/xxx/",
-        "TRAN_APIM_ROUTE": "xxx/api/xxx/",
-        "WCHAT_APIM_ROUTE": "xxx/api/xxx/"
+    "api_versions": {
+      "actionplans": "v4",
+      "actions": "v3",
+      "addresses": "v3",
+      "adviserdetails": "v3",
+      "collections": "v3",
+      "contactdetails": "v2",
+      "customers": "v4",
+      "diversitydetails": "v3",
+      "employmentprogressions": "v4",
+      "goals": "v3",
+      "interactions": "v2",
+      "learningprogressions": "v4",
+      "outcomes": "v4",
+      "sessions": "v3",
+      "subscriptions": "v2",
+      "transfers": "v2",
+      "webchats": "v2"
+    }
     },
     "AT": {
         "APIM_URL": "<REPLACE ME>",

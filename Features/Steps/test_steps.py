@@ -6,40 +6,35 @@ from Utility.API_Utility import API_Utility
 api_util = API_Utility()
 
 #POST request - valid
-@when('User sends POST {api} request to endpoint "{apim_route}" with {endpoint_ids} and the following details')
-def step_impl(context, api, apim_route, endpoint_ids):
+@when('User sends POST {api} request with {endpoint_ids} and the following details')
+def step_impl(context, api, endpoint_ids):
     global response
-    endpoint_append = contruct_endpoint(endpoint_ids)
-    response = api_util.send_POST_request(context.table, context.config.userdata['ENV'], apim_route, endpoint_append, api)
+    response = api_util.send_POST_request(context.table, context.config.userdata['ENV'], construct_endpoint(api, endpoint_ids), api)
     set_object_ids(response.json(), api)
 
 #GET request - no api key
-@when('User sends GET {api} request to endpoint "{apim_route}" with {endpoint_ids} and without api key')
-def step_impl(context, api, apim_route, endpoint_ids):
+@when('User sends GET {api} request with {endpoint_ids} and without api key')
+def step_impl(context, api, endpoint_ids):
     global response
-    endpoint_append = contruct_endpoint(endpoint_ids)
-    response = api_util.send_GET_request_no_api_key(context.config.userdata['ENV'], apim_route, endpoint_append, api)
+    response = api_util.send_GET_request_no_api_key(context.config.userdata['ENV'], construct_endpoint(api, endpoint_ids) , api)
 
 #GET request - no touchpoint id
-@when('User sends GET {api} request to endpoint "{apim_route}" with {endpoint_ids} and without touchpoint id')
-def step_impl(context, api, apim_route, endpoint_ids):
+@when('User sends GET {api} request with {endpoint_ids} and without touchpoint id')
+def step_impl(context, api, endpoint_ids):
     global response
-    endpoint_append = contruct_endpoint(endpoint_ids)
-    response = api_util.send_GET_request_no_touchpoint_id(context.config.userdata['ENV'], apim_route, endpoint_append, api)
+    response = api_util.send_GET_request_no_touchpoint_id(context.config.userdata['ENV'], construct_endpoint(api, endpoint_ids), api)
 
 #GET request - no api version
-@when('User sends GET {api} request to endpoint "{apim_route}" with {endpoint_ids} and without api version')
-def step_impl(context, api, apim_route, endpoint_ids):
+@when('User sends GET {api} request with {endpoint_ids} and without api version')
+def step_impl(context, api, endpoint_ids):
     global response
-    endpoint_append = contruct_endpoint(endpoint_ids)
-    response = api_util.send_GET_request_no_api_version(context.config.userdata['ENV'],apim_route, endpoint_append)
+    response = api_util.send_GET_request_no_api_version(context.config.userdata['ENV'],construct_endpoint(api, endpoint_ids))
 
 #GET request - valid
-@when('User sends GET {api} request to endpoint "{apim_route}" with {endpoint_ids}')
-def step_impl(context, api, apim_route, endpoint_ids):
+@when('User sends GET {api} request with {endpoint_ids}')
+def step_impl(context, api, endpoint_ids):
     global response
-    endpoint_append = contruct_endpoint(endpoint_ids)
-    response = api_util.send_GET_request(context.config.userdata['ENV'], apim_route, endpoint_append, api)
+    response = api_util.send_GET_request(context.config.userdata['ENV'], construct_endpoint(api, endpoint_ids), api)
 
 #Status Code Check
 @then('User verifies the status code is "{status_code}"')
@@ -55,19 +50,19 @@ def step_impl(context):
         assert str(response_json[row["Field"]]).lower() == row["Value"].lower()
 
 #helper functions
-def contruct_endpoint(endpoint_ids):
+def construct_endpoint(api, endpoint_ids):
     endpoint_ids_list = endpoint_ids.split(",")
     endpoint = ""
     for x in endpoint_ids_list:
-        if x == "no ids":
-            return endpoint
-        elif x == "customerid":
-            endpoint += created_customer_id;
+        if x == "customerid":
+            endpoint += "customers/" + created_customer_id + "/";
         elif x == "interactionid":
-            endpoint += "Interactions/" + created_interaction_id + "/"
+            endpoint += "interactions/" + created_interaction_id + "/"
         elif x == "actionPlanId":
-            endpoint += f"ActionPlans/{created_action_plan_id}"
-    return endpoint;
+            endpoint += "actionplans/" + created_action_plan_id + "/"
+    if api not in endpoint:
+        endpoint += api
+    return api + "/api/" + endpoint;
 
 def set_object_ids(json, api):
     global created_customer_id

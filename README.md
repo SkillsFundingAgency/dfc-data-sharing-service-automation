@@ -83,3 +83,8 @@
 
 ## Useful links
 - [Command-Line Arguments - Behave Docs](https://behave.readthedocs.io/en/stable/behave.html)
+
+> [!NOTE]  
+> Currently the records created by the tests are not removed at the end of the tests
+> These records are identifiable by the touchpoint id specified in the API_Utility and can be removed via scripts
+> A possible implementation for this could be to utilise the shared data utility and the service bus associated with it to remove these records as the final step of a pipeline 

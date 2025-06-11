@@ -1,7 +1,7 @@
 Feature: DSS Customers
 
 
-    @customers
+    @customers @post
     Scenario: Post customer (invalid; no API key)
 		When User sends POST customers request with no ids and the following details without api key
 		| Field          | Value    |
@@ -11,7 +11,7 @@ Feature: DSS Customers
 		| PriorityGroups | [1, 3]   |
 		Then User verifies the status code is "401"
   
-    @customers
+    @customers @post
     Scenario: Post customer (invalid; no touchpoint id)
 		When User sends POST customers request with no ids and the following details without touchpoint id
 		| Field          | Value    |
@@ -21,7 +21,7 @@ Feature: DSS Customers
 		| PriorityGroups | [1, 3]   |
 		Then User verifies the status code is "400"
 
-    @customers
+    @customers @post
     Scenario: Post customer (invalid; no api version)
 		When User sends POST customers request with no ids and the following details without api version
 		| Field          | Value    |
@@ -31,7 +31,7 @@ Feature: DSS Customers
 		| PriorityGroups | [1, 3]   |
 		Then User verifies the status code is "404"
 
-  	@customers
+  	@customers @post
 	Scenario: POST customer with subcontractorid (valid request)
 		When User sends POST customers request with no ids and the following details - with subcontractorid
 			| Field                      | Value                |
@@ -66,7 +66,7 @@ Feature: DSS Customers
 			| LastModifiedDate           | 2018-06-21T14:45:00Z |
 			| PriorityGroups             | [1, 3]               |
 
-	@customers
+	@customers @post
 	Scenario: POST customer with maximum field lengths (valid request)
 		When User sends POST customers request with no ids and the following details
 			| Field                      | Value																						        |
@@ -100,7 +100,7 @@ Feature: DSS Customers
 			| LastModifiedDate           | 2018-06-21T14:45:00Z                                                                                 |
 			| PriorityGroups             | [1, 3]                                                                                               |
 
-	@customers
+	@customers @post
 	Scenario: Post Customer with only Mandatory fields
 		When User sends POST customers request with no ids and the following details
 			| Field          | Value    |
@@ -123,7 +123,7 @@ Feature: DSS Customers
 			| IntroducedByAdditionalInfo | none     |
 			| PriorityGroups             | [1, 3]   |
 
-	@customers
+	@customers @post
 	Scenario Outline: Names with spaces
 		When User sends POST customers request with no ids and the <field> with value <name>
 			| Field          | Value    |
@@ -144,7 +144,7 @@ Feature: DSS Customers
 		| FamilyName | Smith-Jones   |
 		| FamilyName | Smith - Jones |
 	
-	@customers @validation
+	@customers @validation @post
 	Scenario: Post Customer with missing mandatory values
 		When User sends POST customers request with no ids and the following details
 			| Field                      | Value                |
@@ -170,7 +170,7 @@ Feature: DSS Customers
 			| The IntroducedBy field is required.  |
 			| Please supply a valid Priority Group |
 
-	@customers @validation
+	@customers @validation @post
 	Scenario: Post Customer with Age less than 13 years
 		When User sends POST customers request with no ids and the following details
 			| Field          | Value                |
@@ -184,7 +184,7 @@ Feature: DSS Customers
 			| ErrorMessage                         |
 			| Customer must be at least 13 years old to use this service     |
 
-	@customers @validation
+	@customers @validation @post
 	Scenario: Post Customer when UniqueLearnerNumber is less than 1000000000
 		When User sends POST customers request with no ids and the following details
 			| Field               | Value     |
@@ -198,7 +198,7 @@ Feature: DSS Customers
 			| ErrorMessage                                                                   |
 			| Unique Learner Number must be greater than 1000000000 and less than 9999999999 |
 
-	@customers @validation
+	@customers @validation @post
 	Scenario: Post Customer when UniqueLearnerNumber is greater than 9999999999
 		When User sends POST customers request with no ids and the following details
 			| Field               | Value       |
@@ -212,7 +212,7 @@ Feature: DSS Customers
 			| ErrorMessage                                                                   |
 			| Unique Learner Number must be greater than 1000000000 and less than 9999999999 |
 
-    @customers @validation
+    @customers @validation @post
 	Scenario: Post Customer when DateOfRegistration is higher than Current date/time
 		When User sends POST customers request with no ids and the following details
 			| Field              | Value                |
@@ -225,8 +225,8 @@ Feature: DSS Customers
 		And Response should contain error
 			| ErrorMessage                                            |
 			| Date of Registration must be less the current date/time |
-
-	@customers @validation
+			 
+	@customers @validation @post
 	Scenario:  Post Customer with invalid Title
 		When User sends POST customers request with no ids and the following details
 			| Field          | Value    |
@@ -240,7 +240,7 @@ Feature: DSS Customers
 			| ErrorMessage                |
 			| Please supply a valid Title |
 
-	@customers @validation
+	@customers @validation @post
 	Scenario: Post Customer with invalid Gender input
 		When User sends POST customers request with no ids and the following details
 			| Field          | Value    |
@@ -254,7 +254,7 @@ Feature: DSS Customers
 			| ErrorMessage                 |
 			| Please supply a valid Gender |
 
-	@customers @validation
+	@customers @validation @post
 	Scenario: Post Customer when DateOfTermination is higher than Current date/time
 		When User sends POST customers request with no ids and the following details
 			| Field             | Value                |
@@ -268,7 +268,7 @@ Feature: DSS Customers
 			| ErrorMessage                                           |
 			| Date Of Termination must be less the current date/time |
 
-	@customers @validation
+	@customers @validation @post
 	Scenario: Post Customer when LastModifiedDate is higher than Current date/time
 		When User sends POST customers request with no ids and the following details
 			| Field            | Value                |
@@ -282,7 +282,7 @@ Feature: DSS Customers
 			| ErrorMessage                                          |
 			| Last Modified Date must be less the current date/time |
 
-	@customers @validation
+	@customers @validation @post
 	Scenario: Post Customer with an invalid IntroducedBy value
 		When User sends POST customers request with no ids and the following details
 			| Field          | Value    |
@@ -295,7 +295,7 @@ Feature: DSS Customers
 			| ErrorMessage                              |
 			| Please supply a valid Introduced By value |
 
-	@customers @validation
+	@customers @validation @post
 	Scenario: Post Customer with an invalid ReasonForTermination value
 		When User sends POST customers request with no ids and the following details
 			| Field                | Value    |
@@ -309,7 +309,7 @@ Feature: DSS Customers
 			| ErrorMessage                                 |
 			| Please supply a valid Reason For Termination |
 
-	@customers @validation
+	@customers @validation @post
 	Scenario: Post Customer where ReasonForTermination has value and DateOfTermination is not entered
 		When User sends POST customers request with no ids and the following details
 			| Field                | Value    |
@@ -324,7 +324,7 @@ Feature: DSS Customers
 			| ErrorMessage                    |
 			| Please enter a Termination Date |
 
-	@customers @validation
+	@customers @validation @post
 	Scenario: Validate Customer Can't have 1 and 6 as PriorityGroups value at the same time
 		When User sends POST customers request with no ids and the following details
 			| Field          | Value    |

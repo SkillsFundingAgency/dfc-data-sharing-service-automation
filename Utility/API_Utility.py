@@ -21,10 +21,11 @@ class API_Utility:
             json_table.update(json_row)
         return json_table
     
-    def send_GET_request(self, env, apim_route, api):
+    def send_GET_request(self, env, apim_route, api, subcontractorid = ""):
         env_data = self.data[env]
         request_headers = {
             'TouchpointId': self.touchpoint_id, 
+            'SubcontractorId': subcontractorid,
             'version': self.shared_data["api_versions"][api], 
             'Ocp-Apim-Subscription-Key': env_data["APIM_ACCESS_KEY"]
         }
@@ -33,16 +34,80 @@ class API_Utility:
         response = requests.get(env_data["APIM_URL"] + apim_route, headers=request_headers)
         return response
 
-    def send_POST_request(self, table, env, apim_route, api):
+    def send_PATCH_request(self, table, env, apim_route, api, subcontractorid = ""):
         env_data = self.data[env]
         request_headers = {
-            'TouchpointId': self.touchpoint_id, 
+            'TouchpointId': self.touchpoint_id,
+            'SubcontractorId': subcontractorid,
             'version': self.shared_data["api_versions"][api], 
             'Ocp-Apim-Subscription-Key': env_data["APIM_ACCESS_KEY"]
         }
         body = API_Utility.table_to_json(table)
 
+        # send the PATCH request
+        response = requests.patch(env_data["APIM_URL"] + apim_route, headers=request_headers, json=body)
+        return response
+
+    def send_POST_request(self, table, env, apim_route, api, subcontractorid = ""):
+        env_data = self.data[env]
+        request_headers = {
+            'TouchpointId': self.touchpoint_id, 
+            'SubcontractorId': subcontractorid,
+            'version': self.shared_data["api_versions"][api], 
+            'Ocp-Apim-Subscription-Key': env_data["APIM_ACCESS_KEY"]
+        }
+        body = API_Utility.table_to_json(table)
+        
         # send the POST request
+        response = requests.post(env_data["APIM_URL"] + apim_route, headers=request_headers, json=body)
+        return response
+
+    def send_POST_request_given_values(self, body, env, apim_route, api, subcontractorid = ""):
+        env_data = self.data[env]
+        request_headers = {
+            'TouchpointId': self.touchpoint_id, 
+            'SubcontractorId': subcontractorid,
+            'version': self.shared_data["api_versions"][api], 
+            'Ocp-Apim-Subscription-Key': env_data["APIM_ACCESS_KEY"]
+        }
+
+        # send the POST request
+        response = requests.post(env_data["APIM_URL"] + apim_route, headers=request_headers, json=body)
+        return response
+
+    def send_POST_request_no_api_key(self, table, env, apim_route, api, subcontractorid = ""):
+        env_data = self.data[env]
+        request_headers = {
+            'TouchpointId': self.touchpoint_id, 
+            'SubcontractorId': subcontractorid,
+            'version': self.shared_data["api_versions"][api]
+        }
+        body = API_Utility.table_to_json(table)
+        # send the GET request
+        response = requests.post(env_data["APIM_URL"] + apim_route, headers=request_headers, json=body)
+        return response
+
+    def send_POST_request_no_touchpoint_id(self, table, env, apim_route, api, subcontractorid = ""):
+        env_data = self.data[env]
+        request_headers = {
+            'SubcontractorId': subcontractorid,
+            'version': self.shared_data["api_versions"][api], 
+            'Ocp-Apim-Subscription-Key': env_data["APIM_ACCESS_KEY"]
+        }
+        body = API_Utility.table_to_json(table)
+        # send the GET request
+        response = requests.post(env_data["APIM_URL"] + apim_route, headers=request_headers, json=body)
+        return response
+
+    def send_POST_request_no_api_version(self, table, env, apim_route, subcontractorid = ""):
+        env_data = self.data[env]
+        request_headers = {
+            'TouchpointId': self.touchpoint_id, 
+            'SubcontractorId': subcontractorid,
+            'Ocp-Apim-Subscription-Key': env_data["APIM_ACCESS_KEY"]
+        }
+        body = API_Utility.table_to_json(table)
+        # send the GET request
         response = requests.post(env_data["APIM_URL"] + apim_route, headers=request_headers, json=body)
         return response
 

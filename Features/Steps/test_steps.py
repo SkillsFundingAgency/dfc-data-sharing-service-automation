@@ -102,7 +102,6 @@ def step_impl(context, status_code):
 @then('Response should contain error')
 def step_impl(context):
     response_string = json.dumps(response.json())
-    logging.warning(response_string)
     for row in context.table:
         if row["ErrorMessage"] not in response_string:
             logging.warning(row["ErrorMessage"])
@@ -110,7 +109,6 @@ def step_impl(context):
 
 @then('Response should contain')
 def step_impl(context):
-    #logging.warning(response.json())
     response_json = response.json()
     for row in context.table:
         if str(response_json[row["Field"]]).lower() != row["Value"].lower():
@@ -121,7 +119,6 @@ def step_impl(context):
 
 @then('Response should contain {field} with value {value}')
 def step_impl(context, field, value):
-    #logging.warning(response.json())
     response_json = response.json()
     assert str(response_json[field]).lower() == value.lower()
 

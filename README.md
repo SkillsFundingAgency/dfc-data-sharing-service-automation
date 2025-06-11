@@ -48,10 +48,13 @@
 2. Execute tests
 
    - Open a CMD window at the root of the repo
+   (to remove old tests resuls, run the following commands in the terminal at the repo root `rm Report_Html` and `rm Report_Json`)
    - Execute the following command to run the test cases (valid 'ENV' values include; `AT`, `TEST`, `OAT`, `PP`, `PRD`):
 
      `behave Features -f allure_behave.formatter:AllureFormatter -o Report_Json -D ENV=<REPLACE ME>`
+   
    - You can run specific tests with tags by adding `--tags=<REPLACE ME>` to the end of the above line
+   - You can also add multiple tags seperated by a comma. e.g. `--tags=customers,post` will only run tests with the customers and post tags
 3. Generate report
 
    - Execute the following command to convert the JSON test execution output into a HTML report:

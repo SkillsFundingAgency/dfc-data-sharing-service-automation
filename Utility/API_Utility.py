@@ -111,6 +111,42 @@ class API_Utility:
         response = requests.post(env_data["APIM_URL"] + apim_route, headers=request_headers, json=body)
         return response
 
+    def send_PATCH_request_no_api_key(self, table, env, apim_route, api, subcontractorid = ""):
+        env_data = self.data[env]
+        request_headers = {
+            'TouchpointId': self.touchpoint_id, 
+            'SubcontractorId': subcontractorid,
+            'version': self.shared_data["api_versions"][api]
+        }
+        body = API_Utility.table_to_json(table)
+        # send the GET request
+        response = requests.patch(env_data["APIM_URL"] + apim_route, headers=request_headers, json=body)
+        return response
+
+    def send_PATCH_request_no_touchpoint_id(self, table, env, apim_route, api, subcontractorid = ""):
+        env_data = self.data[env]
+        request_headers = {
+            'SubcontractorId': subcontractorid,
+            'version': self.shared_data["api_versions"][api], 
+            'Ocp-Apim-Subscription-Key': env_data["APIM_ACCESS_KEY"]
+        }
+        body = API_Utility.table_to_json(table)
+        # send the GET request
+        response = requests.patch(env_data["APIM_URL"] + apim_route, headers=request_headers, json=body)
+        return response
+
+    def send_PATCH_request_no_api_version(self, table, env, apim_route, subcontractorid = ""):
+        env_data = self.data[env]
+        request_headers = {
+            'TouchpointId': self.touchpoint_id, 
+            'SubcontractorId': subcontractorid,
+            'Ocp-Apim-Subscription-Key': env_data["APIM_ACCESS_KEY"]
+        }
+        body = API_Utility.table_to_json(table)
+        # send the GET request
+        response = requests.patch(env_data["APIM_URL"] + apim_route, headers=request_headers, json=body)
+        return response
+
     def send_GET_request_no_api_key(self, env, apim_route, api):
         env_data = self.data[env]
         request_headers = {

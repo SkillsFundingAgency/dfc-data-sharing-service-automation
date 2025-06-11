@@ -44,6 +44,24 @@ def step_impl(context, api, endpoint_ids):
     global response
     response = api_util.send_POST_request(context.table, context.config.userdata['ENV'], construct_endpoint(api, endpoint_ids), api, "99999999")
 
+#PATCH request - no api key
+@when('User sends PATCH {api} request with {endpoint_ids} and the following details without api key')
+def step_impl(context, api, endpoint_ids):
+    global response
+    response = api_util.send_PATCH_request_no_api_key(context.table, context.config.userdata['ENV'], construct_endpoint(api, endpoint_ids) , api)
+
+#PATCH request - no touchpoint id
+@when('User sends PATCH {api} request with {endpoint_ids} and the following details without touchpoint id')
+def step_impl(context, api, endpoint_ids):
+    global response
+    response = api_util.send_PATCH_request_no_touchpoint_id(context.table, context.config.userdata['ENV'], construct_endpoint(api, endpoint_ids), api)
+
+#PATCH request - no api version
+@when('User sends PATCH {api} request with {endpoint_ids} and the following details without api version')
+def step_impl(context, api, endpoint_ids):
+    global response
+    response = api_util.send_PATCH_request_no_api_version(context.table, context.config.userdata['ENV'],construct_endpoint(api, endpoint_ids))
+
 #PATCH request - valid
 @when('User sends PATCH {api} request with {endpoint_ids} and the following details')
 def step_impl(context, api, endpoint_ids):
@@ -84,7 +102,10 @@ def step_impl(context, status_code):
 @then('Response should contain error')
 def step_impl(context):
     response_string = json.dumps(response.json())
+    logging.warning(response_string)
     for row in context.table:
+        if row["ErrorMessage"] not in response_string:
+            logging.warning(row["ErrorMessage"])
         assert row["ErrorMessage"] in response_string
 
 @then('Response should contain')

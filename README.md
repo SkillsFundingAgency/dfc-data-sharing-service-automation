@@ -51,7 +51,7 @@
    - Execute the following command to run the test cases (valid 'ENV' values include; `AT`, `TEST`, `OAT`, `PP`, `PRD`):
 
      `behave Features -f allure_behave.formatter:AllureFormatter -o Report_Json -D ENV=<REPLACE ME>`
-
+   - You can run specific tests with tags by adding `--tags=<REPLACE ME>` to the end of the above line
 3. Generate report
 
    - Execute the following command to convert the JSON test execution output into a HTML report:

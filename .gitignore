@@ -132,3 +132,6 @@ dmypy.json
 # Report Folders
 Report_Html/
 Report_Json/
+/.vs/dfc-data-sharing-service-automation/FileContentIndex
+/.vs/dfc-data-sharing-service-automation/v17
+/.vs
